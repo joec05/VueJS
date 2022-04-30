@@ -1,2 +1,2 @@
 # vuejs
-Vue JS Projects
+This is just a personal VueJS project repository
