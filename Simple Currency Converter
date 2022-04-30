@@ -1,0 +1,79 @@
+<html>
+ <head>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js'></script>
+ </head>
+
+<div id='test'>
+  <select v-model='currency1' @change='calcindex'>
+    <option v-for='elem in option' v-bind:elem='elem'>{{elem.currency}}</option>
+  <select>
+  <input @keyup='trigger1' type='number' v-model.number='input1'>
+     <br/>
+    <select v-model='currency2' @change='calcindex2'>
+       <option v-for='elem in option' v-bind:elem='elem'>{{elem.currency}}</option>
+  <select>
+  <input @keyup='trigger2' type='number' v-model.number='input2'>
+ </div>
+</html>
+
+<script>
+new Vue({
+  el:'#test',
+  data:{
+    index1:0,
+    index2:3,
+    firsttyped:true,
+    currency1: 'USD',
+    input1: 0,
+    currency2: 'Yuan',
+    input2: 0,
+    option:[
+      {currency: 'USD', rate: 1.09},
+      {currency: 'Euros', rate: 0.92},
+      {currency: 'Rubles', rate: 81.75},
+      {currency: 'Yuan', rate: 6.42}
+    ]
+  },
+  props:['elem'],
+  methods:{
+   trigger1: function(e, elem){
+     this.firsttyped=true;
+     this.calculate();
+   },
+    trigger2: function(e, elem){
+      this.firsttyped=false;
+     this.calculate();
+   },
+    calculate: function(e, elem){
+      if(isNaN(this.input1)||isNaN(this.input2)){
+        this.input1=0;
+        this.input2=0;
+      }
+      if(this.firsttyped){
+        this.input2= (this.option[this.index2].rate * this.input1).toFixed(2);
+      }else{
+        this.input1= (this.option[this.index1].rate * this.input2).toFixed(2);
+      }
+    },
+    calcindex: function(){
+      var currency = this.currency1;
+      this.option.forEach((elem, index) => {
+        if(elem.currency==currency){this.index1=index}
+      })
+      this.firsttyped=false;
+      if(this.index2!=this.index1){this.calculate();}
+      else{this.input1=this.input2}
+      
+    },
+    calcindex2: function(){
+      var currency = this.currency2;
+      this.option.forEach((elem, index) => {
+        if(elem.currency==currency){this.index2=index;}
+      })
+      this.firsttyped=true;
+      if(this.index1!=this.index2){this.calculate();}
+      else{this.input2=this.input1}
+    }
+  }
+})
+</script>
