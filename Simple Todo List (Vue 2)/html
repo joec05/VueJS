@@ -1,3 +1,4 @@
+<html>
 <div id='container'>
   <div class='cont'>
     <input type='text' v-model='newmemo' v-on:keyup.enter='add'> 
@@ -16,4 +17,4 @@
   </div>
      
 </div>
-
+</html>
