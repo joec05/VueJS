@@ -34,7 +34,7 @@ new Vue({
       if(this.firsttyped){
         this.input2= (this.option[this.index2].rate * this.input1).toFixed(2);
       }else{
-        this.input1= (this.option[this.index1].rate * this.input2).toFixed(2);
+        this.input1= (this.input2 / this.option[this.index2].rate).toFixed(2);
       }
     },
     calcindex: function(){
