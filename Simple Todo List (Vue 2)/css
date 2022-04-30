@@ -1,0 +1,61 @@
+<style>
+ .cont{
+  text-align:center;
+  margin-bottom:1.5rem;
+  position:relative;
+}
+
+.cont input{
+  width:30%;
+}
+
+.form {
+  width: 400px;
+}
+
+.cont1{
+  padding-left:5%;
+  padding-right:5%;
+}
+
+.panel {
+  width: 28%;
+ margin-left:2%;
+  margin-right:2%;
+  overflow: hidden;
+  border: 1px solid;
+  text-align: center;
+  transition: all 1s;
+  display: inline-block;
+}
+
+.players {
+  position: relative;
+  text-align: center;
+}
+
+.remove {
+  float: right;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 12px;
+  vertical-align: bottom
+}
+
+.player-enter,
+.player-leave-to {
+  opacity: 0;
+}
+
+.player-enter {
+  transform: translateY(40%);
+}
+
+.player-leave-to {
+  transform: translateX(-100%);
+}
+
+.player-leave-active {
+  position: absolute;
+}
+</style>
