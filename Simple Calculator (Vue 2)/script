@@ -1,0 +1,36 @@
+<script>
+//https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js
+new Vue({
+  el:'#calculator',
+  data:{
+    res:'',
+    symbolindex:0,
+  },
+  methods:{
+    addnum:function(input){
+      this.res+=input;
+    },
+    addsymbol:function(input){
+      if(!isNaN(this.res[this.res.length-1])){
+        this.res+=input;
+      }
+      this.symbolindex=this.res.length-1;
+    },
+    adddot:function(input){
+      var sliced = this.res.slice(this.symbolindex, this.res.length).split('');
+      var dotcount = sliced.filter((a)=>a=='.').length;
+      if(!isNaN(this.res[this.res.length-1])){
+        if(dotcount<1){
+          this.res+=input;
+        }
+      }
+    },
+    calculate:function(){
+      if(!isNaN(this.res[this.res.length-1])){
+        this.res=eval(this.res).toString();
+        this.symbolindex=0;
+      }
+    }
+  }
+})
+</script>
