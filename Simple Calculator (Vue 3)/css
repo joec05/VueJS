@@ -1,0 +1,46 @@
+<style>
+#calculator{
+  width:400px;
+}
+
+#result{
+  display:flex;
+  justify-content:end;
+  align-items:center;
+}
+
+#result p{
+  margin-right:1rem;
+}
+
+#row{
+  display:grid;
+  grid-template-columns:repeat(4, 25%);
+}
+
+#row div{
+  background-color: black;
+  cursor:pointer;
+}
+
+#row div p{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+}
+
+#row div:hover{
+  background-color: grey;
+}
+
+#result{
+  height:4rem;
+  background-color:black;
+}
+
+#result p{
+  color: white;
+  font-size:150%;
+}
+</style>
