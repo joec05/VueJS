@@ -1,0 +1,36 @@
+<script>
+//https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.cjs.js
+const { ref, reactive, readonly, computed } = Vue;
+
+var App = {
+  setup(){
+    const res = reactive({val:''});
+    const symbol = reactive({index:0});
+    const addnum = (input) => {
+      res.val+=input;
+    }
+    const addsymbol = (input) => {
+      if(!isNaN(res.val[res.val.length-1])){
+        res.val+=input;
+      }
+      symbol.index = res.val.length-1;
+    }
+    const adddot = (input) => {
+      var sliced = res.val.slice(symbol.index, res.val.length).split('');
+      var dotcount = sliced.filter((a)=>a=='.').length;
+      if(!isNaN(res.val[res.val.length-1])&& dotcount==0){
+        res.val+=input;
+      }
+    }
+    const calculate = () => {
+      if(!isNaN(res.val[res.val.length-1])){
+        res.val = eval(res.val).toString();
+        symbol.index = 0;
+      }
+    }
+    return { res, symbol, addnum, addsymbol, adddot, calculate }
+  }
+}
+
+Vue.createApp(App).mount('#calculator');
+</script>
