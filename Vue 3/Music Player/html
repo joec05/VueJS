@@ -3,7 +3,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.cjs.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
         <script src="https://unpkg.com/vue@next"></script>
-        <link rel="stylesheet" href="style.css">
     </head>
      
      <div id='music-player'>
@@ -27,5 +26,4 @@
          <audio controls v-bind:src='list.src' v-show='!list.src' @ended='onend'></audio>
        </div>
      </div>
-    <script src="script.js"></script>
 </html>
