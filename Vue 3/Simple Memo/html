@@ -1,0 +1,22 @@
+<html>
+     <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+        <script src="https://unpkg.com/vue@next"></script>
+    </head>
+
+<div id='test'>
+  <div class='cont'>
+    <input v-model.number='input.text'  v-on:keyup.enter='add'>
+  <button @click='add'>Add</button>
+  </div>
+  
+  <div class='cont1'>
+        <div class='panel' v-for='(todo, index) in todos' v-bind:todo='todo' v-bind:index='index'>
+    <label>
+      <input type='checkbox' v-model='todo.checked'>{{todo.title}}
+      <button @click='askdelete(todo)'> Delete</button>
+    </label>
+  </div>
+  </div>
+</div>
+</html>
