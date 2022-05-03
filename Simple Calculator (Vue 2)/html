@@ -1,4 +1,8 @@
 <html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    </head>
+    
 <div id='calculator'>
   <div id='result'>
     <p>{{res}}</p>
