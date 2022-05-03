@@ -1,5 +1,4 @@
 <script>
-//https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.cjs.js
 const { ref, reactive, readonly, computed } = Vue;
 
 var App = {
