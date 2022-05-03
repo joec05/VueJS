@@ -1,0 +1,97 @@
+#title{
+    font-size:110%;
+  }
+  
+  #music-player{
+    text-align:center;
+  }
+  
+  audio{
+    display: none !important;
+  }
+  
+  #music-box{
+    position:relative;
+  }
+  
+  #contents{
+    position:relative;
+    padding-top:0.75rem;
+    padding-bottom:0.75rem;
+    cursor:pointer;
+    width:60%;
+    margin-left:20%;
+    margin-right:20%;
+    text-align:center;
+    border:2px solid crimson;
+  }
+  
+  #contents:hover{
+    background-color:grey;
+  }
+  
+  div i{
+    color:black;
+  }
+  
+  .more-logo{
+    width:min-content;
+    padding:0.1rem;
+    position:absolute;
+    right:0.5rem;
+    top:50%;
+  transform:translateY(-50%);
+  }
+  
+  #prevnext{
+    display:flex;
+    justify-content:center;
+    margin-bottom:1.5rem;
+  }
+  
+  #prevnext div{
+    margin-left: 0.25rem;
+    margin-right:0.25rem;
+    background-color:black;
+    padding:.5rem .5rem .5rem .5rem;
+    cursor:pointer;
+  }
+  
+  #prevnext div i{
+    color:grey;
+  }
+  
+  #prevnext div:hover{
+    background-color:crimson;
+  }
+  
+  #sidebar{
+    margin-top:-3rem;
+    position:absolute;
+    left:80%;
+    z-index: 10;
+  }
+  
+  #sidebar-content{
+    width:fit-content;
+    background-color:grey;
+     
+  }
+  
+  #sidebar-content div{
+    margin-top:0.5rem;
+    margin-bottom:0.5rem;
+    cursor:pointer;
+    padding-left:0.25rem;
+    padding-right:0.25rem;
+    padding-top:0.2rem;
+    padding-bottom:0.2rem;
+  }
+  
+  #sidebar-content div:hover{
+    background-color:azure;
+  }
+  
+  #select-loop{
+    margin-bottom:1rem;
+  }
