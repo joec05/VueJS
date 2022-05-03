@@ -80,10 +80,7 @@ var music= new Vue({
     },
     onend:function(){
         if(this.indexnext.length>0){
-            this.indexnext=Number(this.indexnext);
-            this.paste(this.indexnext);
-            audios[this.indexnext].play();
-            this.currentindex=this.indexnext;
+            this.play(Number(this.indexnext));
             this.indexnext='';
         }else{
             if(this.selectedloop=='unchanged'){
