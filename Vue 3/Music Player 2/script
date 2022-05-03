@@ -1,0 +1,123 @@
+var audios=document.querySelectorAll('audio');
+
+var music= Vue.createApp({
+  data(){
+      return {
+        indexnext:'',
+        selectedloop:'unchanged',
+        currentindex:0,
+        nowplaying:'Music',
+        prevplay:0,
+        lists:[
+          {name: 'A Whole New World', artist: 'Zayn', playing:false, sidebarshow:false, src:'awholenewworld.mp3'},
+          {name: 'Orange', artist: 'Shigatsu', playing:false,  sidebarshow:false, src:'orange.mp3'},
+          {name: 'Pretty Boy', artist: 'M2M', playing:false,  sidebarshow:false, src:'pretty-boy.mp3'},
+          {name: 'How Have You Been', artist: 'Eric Chou', playing:false,  sidebarshow:false, src:'how-have-you-been.mp3'},
+          {name: 'Why', artist: 'Full House', playing:false,  sidebarshow:false, src:'full-house-ost.mp3'}
+        ]
+      }
+  },
+  props:['index', 'list'],
+  methods:{
+    paste:function(index){
+      this.nowplaying=this.lists[index].name +' - '+ this.lists[index].artist;
+    },
+    play:function(index){
+      audios=document.querySelectorAll('audio');
+        if(this.prevplay!=index){
+        audios[this.prevplay].currentTime=0;
+        audios[this.prevplay].pause();
+        audios[index].play();
+        this.lists[index].playing=true;
+        this.paste(index);
+        this.prevplay=index;
+        this.currentindex=index;
+      }else{
+        if(!this.lists[index].playing){
+          audios[index].play();
+          this.lists[index].playing=true;
+          this.paste(index); this.currentindex=index;
+        }else{
+          audios[index].pause();
+          this.lists[index].playing=false;
+        }
+      }
+    },
+    next:function(){
+      this.prevplay=this.currentindex;
+      audios[this.prevplay].currentTime=0;
+      this.lists[this.prevplay].playing=false;
+      this.currentindex++;
+      if(this.currentindex==audios.length){this.currentindex=0};
+      this.play(this.currentindex);
+    },
+    prev:function(){
+      this.prevplay=this.currentindex;
+      audios[this.prevplay].currentTime=0;
+      this.lists[this.prevplay].playing=false;
+      this.currentindex--;
+      if(this.currentindex==-1){this.currentindex= audios.length-1};
+      this.play(this.currentindex);
+    },
+    onend:function(){
+        if(this.indexnext.length>0){
+            this.indexnext=Number(this.indexnext);
+            this.paste(this.indexnext);
+            audios[this.indexnext].play();
+            this.currentindex=this.indexnext;
+            this.indexnext='';
+        }else{
+            if(this.selectedloop=='unchanged'){
+                audios[this.currentindex].currentTime=0;
+                audios[this.currentindex].play()}
+              else if(this.selectedloop=='increment'){this.next()}
+              else if(this.selectedloop=='random'){
+                var getRandom=Math.floor(Math.random()*audios.length);
+                audios[this.currentindex].currentTime=0;
+                audios[this.currentindex].pause();
+                this.lists[this.currentindex].playing=false;
+                this.paste(getRandom);
+                this.lists[getRandom].playing=true;
+                audios[getRandom].play();
+                this.currentindex=getRandom;
+                this.prevplay=getRandom;
+              }
+        }
+    },
+    deletemusicc:function(index){
+      this.lists.splice(index,1);
+    },
+    togglesidebar:function(index){
+        var lists2=[...this.lists];
+        this.lists[index].sidebarshow=!this.lists[index].sidebarshow;
+        lists2.splice(index,1);
+        lists2.forEach((list)=>list.sidebarshow=false);
+    },
+    playnext:function(index){
+        this.indexnext=index.toString();
+        this.lists[index].sidebarshow=false;
+    }
+  },
+})
+
+music.component('sidebar',{
+    template:`
+    <div id='sidebar'>
+    <div id='sidebar-content'>
+    <div @click='setplaynext'>Play Next</div>
+    <div @click='askdeletemusic'>Delete</div>
+    </div>
+    </div>
+    `,
+    props:['index'],
+    methods:{
+      askdeletemusic:function(){
+        this.$emit('deletemusic', this.index);
+      },
+      setplaynext:function(){
+          this.$emit('playnext', this.index);
+      }
+    }
+})
+
+music.mount('#music-player');
