@@ -27,6 +27,7 @@ var music= Vue.createApp({
         if(this.prevplay!=index){
         audios[this.prevplay].currentTime=0;
         audios[this.prevplay].pause();
+        this.lists[this.prevplay].playing=false;
         audios[index].play();
         this.lists[index].playing=true;
         this.paste(index);
@@ -45,16 +46,12 @@ var music= Vue.createApp({
     },
     next:function(){
       this.prevplay=this.currentindex;
-      audios[this.prevplay].currentTime=0;
-      this.lists[this.prevplay].playing=false;
       this.currentindex++;
       if(this.currentindex==audios.length){this.currentindex=0};
       this.play(this.currentindex);
     },
     prev:function(){
       this.prevplay=this.currentindex;
-      audios[this.prevplay].currentTime=0;
-      this.lists[this.prevplay].playing=false;
       this.currentindex--;
       if(this.currentindex==-1){this.currentindex= audios.length-1};
       this.play(this.currentindex);
@@ -70,14 +67,7 @@ var music= Vue.createApp({
               else if(this.selectedloop=='increment'){this.next()}
               else if(this.selectedloop=='random'){
                 var getRandom=Math.floor(Math.random()*audios.length);
-                audios[this.currentindex].currentTime=0;
-                audios[this.currentindex].pause();
-                this.lists[this.currentindex].playing=false;
-                this.paste(getRandom);
-                this.lists[getRandom].playing=true;
-                audios[getRandom].play();
-                this.currentindex=getRandom;
-                this.prevplay=getRandom;
+                this.play(getRandom);
               }
         }
     },
