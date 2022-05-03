@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
+    </head>
+     
+     <div id='music-player'>
+       <h2>{{nowplaying}} {{currentindex}}</h2>
+       <div id='select-loop'>
+       <label for='loop'>Choose loop</label>
+       <select name='loop' v-model='selectedloop'>
+         <option>unchanged</option>
+         <option>increment</option>
+         <option>random</option>
+       </select>
+       </div>
+       <div id='prevnext'>
+         <div id='prev' @click='prev'><i class="fas fa-arrow-left"></i></div>
+         <div id='next' @click='next'><i class="fas fa-arrow-right"></i></div>
+       </div>
+       <div id='music-box' v-for='(list, index) in lists' v-bind:list='list' v-bind:index='index'>
+         <div id='contents' @click='play(index)'>
+           <div id='text'><strong id='title'>{{list.name}}</strong> - {{list.artist}}</div><div class='more-logo' @click.prevent.stop @click='togglesidebar(index)'><i class="fas fa-ellipsis-v"></i></div>
+         </div>
+         <audio controls v-bind:src='list.src' v-show='!list.src' @ended='onend'></audio>
+         <sidebar v-bind:index='index' v-show='lists[index].sidebarshow' @deletemusic='deletemusicc' @playnext="playnext"></sidebar>
+       </div>
+     </div>
+     
+    <script src="script.js"></script>
+</html>
