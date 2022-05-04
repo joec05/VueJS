@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    </head>
+    <div id="quiz">
+        <h1>Quiz</h1>
+        <div id="buttons" v-if="buttonsappear">
+            <h4>Select Quiz Type</h4>
+            <button @click="add('add')">Add</button>
+            <button @click="add('subtract')">Subtract</button>
+            <button @click="add('multiply')">Multiply</button>
+            <button @click="add('divide')">Divide</button>
+        </div>
+        <div v-for="(problem, index) in quiz[currentindex]" v-bind:problem="problem" v-if="currentshow==index&&!buttonsappear" id="question">
+            <h3>{{problem.question}}</h3>
+            <div v-for="(option, optionindex) in problem.options" id="option-btn">
+                <h4 @click="checkanswer(optionindex)">{{option}}</h4>
+            </div>
+        </div>
+        <div id="final" v-if="currentshow==quiz[currentindex].length">
+            <h3>You've got {{correctcount}} out of {{quiz[currentindex].length}} questions answered correctly!!!</h3>
+            <br/>
+            <h4>Do you want to repeat the quiz??</h4>
+            <button @click="repeatquiz">Yes</button> <button @click="goback">No</button>
+        </div>
+    </div>
+</html>
