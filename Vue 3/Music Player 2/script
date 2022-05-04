@@ -1,4 +1,5 @@
-var audios=document.querySelectorAll('audio');
+var audios=[...document.querySelectorAll('audio')];
+var musicBoxes=[...document.querySelectorAll('#music-box')];
 
 var music= Vue.createApp({
   data(){
@@ -14,7 +15,7 @@ var music= Vue.createApp({
           {name: 'Pretty Boy', artist: 'M2M', playing:false,  sidebarshow:false, src:'pretty-boy.mp3'},
           {name: 'How Have You Been', artist: 'Eric Chou', playing:false,  sidebarshow:false, src:'how-have-you-been.mp3'},
           {name: 'Why', artist: 'Full House', playing:false,  sidebarshow:false, src:'full-house-ost.mp3'}
-        ]
+        ],
       }
   },
   props:['index', 'list'],
@@ -23,7 +24,8 @@ var music= Vue.createApp({
       this.nowplaying=this.lists[index].name +' - '+ this.lists[index].artist;
     },
     play:function(index){
-      audios=document.querySelectorAll('audio');
+      audios=[...document.querySelectorAll('audio')];
+      musicBoxes=[...document.querySelectorAll('#music-box')];
         if(this.prevplay!=index){
         audios[this.prevplay].currentTime=0;
         audios[this.prevplay].pause();
@@ -50,10 +52,10 @@ var music= Vue.createApp({
       if(this.currentindex==audios.length){this.currentindex=0};
       this.play(this.currentindex);
     },
-    prev:function(){
+    prev:function(){      
       this.prevplay=this.currentindex;
       this.currentindex--;
-      if(this.currentindex==-1){this.currentindex= audios.length-1};
+      if(this.currentindex==-1){this.currentindex=audios.length-1};
       this.play(this.currentindex);
     },
     onend:function(){
@@ -72,8 +74,14 @@ var music= Vue.createApp({
         }
     },
     deletemusicc:function(index){
-      this.lists.splice(index,1);
-    },
+      musicBoxes=[...document.querySelectorAll('#music-box')];
+      musicBoxes[index].remove();
+      musicBoxes.splice(index,1);
+      audios.splice(index,1);
+      this.currentindex--;
+      if(this.currentindex==-1){this.currentindex=audios.length-1};
+      this.prevplay=this.currentindex;
+    }, 
     togglesidebar:function(index){
         var lists2=[...this.lists];
         this.lists[index].sidebarshow=!this.lists[index].sidebarshow;
@@ -83,7 +91,7 @@ var music= Vue.createApp({
     playnext:function(index){
         this.indexnext=index.toString();
         this.lists[index].sidebarshow=false;
-    }
+    },
   },
 })
 
