@@ -1,13 +1,13 @@
 <html>
     <head>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+        <script src="https://unpkg.com/vue@next"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     </head>
      
      <div id='music-player'>
        <h2>{{nowplaying}} {{currentindex}}</h2>
        <div id='select-loop'>
-       <label for='loop'>Choose loop</label>
+       <label for='loop'>Choose loop </label>
        <select name='loop' v-model='selectedloop'>
          <option>unchanged</option>
          <option>increment</option>
@@ -26,5 +26,4 @@
          <sidebar v-bind:index='index' v-show='lists[index].sidebarshow' @deletemusic='deletemusicc' @playnext="playnext"></sidebar>
        </div>
      </div>
-     
 </html>
