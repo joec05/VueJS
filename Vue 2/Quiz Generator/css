@@ -1,0 +1,31 @@
+#quiz{
+    width:30%;
+    margin-left:35%;
+    margin-right:35%;
+    text-align: center;
+}
+
+#question{
+    text-align: left;
+}
+
+#option-btn{
+    display:inline-flex;
+    width:50%;
+    text-align: center;
+    background-color: rgb(71, 67, 67);
+}
+
+#option-btn h4{
+    width:50%;
+    margin-left:25%;
+    margin-right: 25%;
+    padding-top:1.5rem;
+    padding-bottom:1.5rem;
+    border-radius: 20%;
+    cursor: pointer;
+}
+
+#option-btn h4:hover{
+    background-color: rgb(58, 57, 57);
+}
